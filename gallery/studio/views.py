@@ -1,6 +1,6 @@
 from django.http  import HttpResponse,Http404
 import datetime as dt
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 
 
 
@@ -40,6 +40,10 @@ def past_days_studio(request,past_date):
     except ValueError:
         # Raise 404 error when ValueError is thrown
         raise Http404()
+        assert False
+
+    if date == dt.date.today():
+        return redirect(studio_of_day)    
 
     day = convert_dates(date)
     html = f'''
