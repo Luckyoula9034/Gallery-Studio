@@ -1,26 +1,25 @@
-from django.http  import HttpResponse,Http404
+
+from django.shortcuts import render
+from django.http import HttpResponse, Http404
 import datetime as dt
-from django.shortcuts import render,redirect
-
-
 
 # Create your views here.
 def welcome(request):
-    return render(request, 'welcome.html')
+    return HttpResponse('Welcome to the gallery')
 
 def studio_of_day(request):
     date = dt.date.today()
-
+    
     # FUNCTION TO CONVERT DATE OBJECT TO FIND EXACT DAY
     day = convert_dates(date)
     html = f'''
-        <html>
+            <html>
             <body>
-                <h1>Studio for {day} {date.day}-{date.month}-{date.year}</h1>
+            <h1> Studio for {day} {date.day}-{date.month}-{date.year}</h1>
             </body>
-        </html>
+            </html>
             '''
-    return HttpResponse(html)   
+    return HttpResponse(html)
 
 def convert_dates(dates):
 
@@ -31,26 +30,23 @@ def convert_dates(dates):
 
     # Returning the actual day of the week
     day = days[day_number]
-    return day       
+    return day
 
 def past_days_studio(request,past_date):
+    
     try:
         # Converts data from the string Url
-       date = dt.datetime.strptime(past_date,'%Y-%m-%d').date()
+        date = dt.datetime.strptime(past_date,'%Y-%m-%d').date()
     except ValueError:
         # Raise 404 error when ValueError is thrown
         raise Http404()
-        assert False
-
-    if date == dt.date.today():
-        return redirect(studio_of_day)    
 
     day = convert_dates(date)
     html = f'''
-        <html>
+            <html>
             <body>
                 <h1>Studio for {day} {date.day}-{date.month}-{date.year}</h1>
             </body>
-        </html>
+            </html>
             '''
     return HttpResponse(html)
