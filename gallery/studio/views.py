@@ -1,12 +1,13 @@
 from django.http  import HttpResponse,Http404
 import datetime as dt
+from django.shortcuts import render
 
 
 
 # Create your views here.
 def welcome(request):
-    return HttpResponse('Welcome to the Gallery')
-
+    return render(request, 'welcome.html')
+    
 def studio_of_day(request):
     date = dt.date.today()
 
