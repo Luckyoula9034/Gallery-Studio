@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  {% if title %}
+  <title>Studio Gallery - {{title}}</title>
+  {% else %}
+    <title> Studio Gallery </title>
+  {% endif %}
+
+</head>
+<body>
+    {% block content %} <h1>Studio for {{date|date:"l d-F Y"}}</h1> {%endblock%}
+</body>
+</html>
